@@ -5,7 +5,7 @@ class HeaderLocators:
     SIGN_IN_OR_REGISTER_BUTTON = (By.XPATH, "//button[text()='Вход и регистрация']")
     POST_AD_BUTTON = (By.XPATH, "//button[text()='Разместить объявление']")
     USER_AVATAR = (By.XPATH, './/button[@class="circleSmall"]/img')
-    USER_NAME = (By.CSS, ".profileText.name")
+    USER_NAME = (By.CSS_SELECTOR, ".profileText.name")
     LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выйти']")
     PROFILE_LINK = (By.CSS_SELECTOR, ".circleSmall")
 
