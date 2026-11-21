@@ -11,6 +11,7 @@ class TestUserLogin:
         wait.until(expected_conditions.visibility_of_element_located(AuthLocators.EMAIL_INPUT)).send_keys(existing_user["email"])
         driver.find_element(*AuthLocators.PASSWORD_INPUT).send_keys(existing_user["password"])
         driver.find_element(*AuthLocators.LOGIN_BUTTON).click()
+        wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.USER_AVATAR))
         actual_user_name = wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.USER_NAME)).text
         assert actual_user_name == "User."
 
@@ -20,5 +21,6 @@ class TestUserLogout:
         wait = WebDriverWait(driver, 10)
         wait.until(expected_conditions.element_to_be_clickable(HeaderLocators.LOGOUT_BUTTON)).click()
         wait.until(expected_conditions.invisibility_of_element_located(HeaderLocators.USER_AVATAR))
+        wait.until(expected_conditions.invisibility_of_element_located(HeaderLocators.USER_NAME))
         actual_button_text = wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.SIGN_IN_OR_REGISTER_BUTTON)).text
         assert actual_button_text == "Вход и регистрация"
