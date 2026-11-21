@@ -1,5 +1,5 @@
 from selenium.webdriver.support import expected_conditions as conditions
-from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait
 
 from locators import AdLocators, HeaderLocators
 
