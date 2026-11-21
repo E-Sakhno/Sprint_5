@@ -13,7 +13,8 @@ class TestAdCreation:
 
     def test_authorized_user_can_create_ad(self, driver, logged_in_user):
         ad_title = "Автотестовое объявление"
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 10)
+
         wait.until(conditions.element_to_be_clickable(HeaderLocators.POST_AD_BUTTON)).click()
         wait.until(conditions.visibility_of_element_located(AdLocators.TITLE_INPUT)).send_keys(ad_title)
         driver.find_element(*AdLocators.DESCRIPTION_INPUT).send_keys("Описание товара для автотеста")
@@ -24,11 +25,13 @@ class TestAdCreation:
         driver.find_element(*AdLocators.CITY_OPTION).click()
         driver.find_element(*AdLocators.CONDITION_RADIO_NEW).click()
         driver.find_element(*AdLocators.PUBLISH_BUTTON).click()
+
         wait.until(conditions.visibility_of_element_located(HeaderLocators.USER_NAME)) 
+        # почему-то если кликнуть только один раз - падает по таймауту на строчке с MY_ADS_SECTION. Если продублировать строчку - тест проходит
+        # пыталась увеличивать время в wait, подскроллить до ссылки, ожидать кликабельность - всё равно падало
         wait.until(conditions.visibility_of_element_located(HeaderLocators.PROFILE_LINK)).click()
-        # почему-то если кликнуть только один раз - падает по таймауту. Если продублировать строчку - тест проходит
-        # пыталась увеличивать время в wait, подскроллить до шапки, ожидать кликабельность - всё равно падало
         wait.until(conditions.visibility_of_element_located(HeaderLocators.PROFILE_LINK)).click()
+        
         wait.until(conditions.visibility_of_element_located(AdLocators.MY_ADS_SECTION))
         my_ads_section = driver.find_element(*AdLocators.MY_ADS_SECTION)
         driver.execute_script("arguments[0].scrollIntoView();", my_ads_section)
