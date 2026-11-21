@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 class HeaderLocators:
     SIGN_IN_OR_REGISTER_BUTTON = (By.XPATH, "//button[text()='Вход и регистрация']")
     POST_AD_BUTTON = (By.XPATH, "//button[text()='Разместить объявление']")
-    USER_AVATAR = (By.XPATH, './/button[@class="circleSmall"]/img')
+    USER_AVATAR = (By.XPATH, './/button[@class="circleSmall"]')
     USER_NAME = (By.CSS_SELECTOR, ".profileText.name")
     LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выйти']")
     PROFILE_LINK = (By.CSS_SELECTOR, ".circleSmall")
@@ -22,6 +22,9 @@ class RegistrationLocators:
     PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[name="password"]')
     PASSWORD_CONFIRMATION_INPUT = (By.CSS_SELECTOR, 'input[name="submitPassword"]')
     CREATE_ACCOUNT_BUTTON = (By.XPATH, "//button[text()='Создать аккаунт']")
+    EMAIL_ERROR_CONTAINER = (By.CSS_SELECTOR, "div[class*='input_inputError']:has(input[name='email'])")
+    PASSWORD_ERROR_CONTAINER = (By.CSS_SELECTOR, "div[class*='input_inputError']:has(input[name='password'])")
+    PASSWORD_CONFIRMATION_ERROR_CONTAINER = (By.CSS_SELECTOR, "div[class*='input_inputError']:has(input[name='submitPassword'])")
     ERROR_MESSAGE = (By.XPATH, "//span[text()='Ошибка']")
 
 
