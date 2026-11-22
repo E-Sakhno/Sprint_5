@@ -1,6 +1,9 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+from locators import AuthLocators, HeaderLocators
 
 
 @pytest.fixture
@@ -27,11 +30,6 @@ def existing_user():
 
 @pytest.fixture
 def logged_in_user(driver, existing_user):
-    from selenium.webdriver.support import expected_conditions
-    from selenium.webdriver.support.ui import WebDriverWait
-
-    from locators import AuthLocators, HeaderLocators
-
     wait = WebDriverWait(driver, 10)
     wait.until(expected_conditions.element_to_be_clickable(HeaderLocators.SIGN_IN_OR_REGISTER_BUTTON)).click()
     wait.until(expected_conditions.visibility_of_element_located(AuthLocators.EMAIL_INPUT))
