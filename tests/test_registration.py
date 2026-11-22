@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 from locators import AuthLocators, HeaderLocators, RegistrationLocators
-from data import UserData
+from data import UserData, Titles
 
 
 WAIT_TIMEOUT = 10
@@ -24,7 +24,7 @@ class TestUserRegistration:
         driver.find_element(*RegistrationLocators.CREATE_ACCOUNT_BUTTON).click()
         wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.USER_AVATAR))
         actual_user_name = wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.USER_NAME)).text
-        assert actual_user_name == "User."
+        assert actual_user_name == Titles.defaul_user_name
 
     def test_registration_with_invalid_email_shows_error(self, driver):
         wait = WebDriverWait(driver, WAIT_TIMEOUT)

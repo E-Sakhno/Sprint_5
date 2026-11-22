@@ -2,7 +2,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 from locators import AuthLocators, HeaderLocators
-from data import UserData
+from data import UserData, Titles
 
 
 class TestUserLogin:
@@ -14,7 +14,7 @@ class TestUserLogin:
         driver.find_element(*AuthLocators.LOGIN_BUTTON).click()
         wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.USER_AVATAR))
         actual_user_name = wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.USER_NAME)).text
-        assert actual_user_name == "User."
+        assert actual_user_name == Titles.defaul_user_name
 
 
 class TestUserLogout:
@@ -24,4 +24,4 @@ class TestUserLogout:
         wait.until(expected_conditions.invisibility_of_element_located(HeaderLocators.USER_AVATAR))
         wait.until(expected_conditions.invisibility_of_element_located(HeaderLocators.USER_NAME))
         actual_button_text = wait.until(expected_conditions.visibility_of_element_located(HeaderLocators.SIGN_IN_OR_REGISTER_BUTTON)).text
-        assert actual_button_text == "Вход и регистрация"
+        assert actual_button_text == Titles.login_button_text

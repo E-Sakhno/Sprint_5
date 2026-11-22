@@ -2,6 +2,7 @@ from selenium.webdriver.support import expected_conditions as conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 from locators import AdLocators, HeaderLocators
+from data import Titles
 
 
 class TestAdCreation:
@@ -9,10 +10,10 @@ class TestAdCreation:
         wait = WebDriverWait(driver, 10)
         wait.until(conditions.element_to_be_clickable(HeaderLocators.POST_AD_BUTTON)).click()
         actual_title = wait.until(conditions.visibility_of_element_located(AdLocators.AUTH_REQUIRED_TITLE)).text
-        assert actual_title == "Чтобы разместить объявление, авторизуйтесь"
+        assert actual_title == Titles.title_add_ads_for_unauth
 
     def test_authorized_user_can_create_ad(self, driver, logged_in_user):
-        ad_title = "Автотестовое объявление"
+        ad_title = Titles.testing_ad_name
         wait = WebDriverWait(driver, 10)
 
         wait.until(conditions.element_to_be_clickable(HeaderLocators.POST_AD_BUTTON)).click()
