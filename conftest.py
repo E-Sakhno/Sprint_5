@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import AuthLocators, HeaderLocators
-from data import UserData
+from data import UserData, Urls
 
 
 @pytest.fixture
@@ -14,7 +14,7 @@ def driver():
 
     browser = webdriver.Chrome(options=options)
 
-    browser.get("https://qa-desk.education-services.ru/")
+    browser.get(Urls.BASE_URLS)
     # нейронка подсказала, что можно использовать yield вместо return, и закрывать браузер после yield
     yield browser
 
