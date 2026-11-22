@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 from locators import AuthLocators, HeaderLocators, RegistrationLocators
+from data import TestingData
 
 
 WAIT_TIMEOUT = 10
@@ -53,13 +54,13 @@ class TestUserRegistration:
         )
         assert actual_validation_result == expected_validation_result
 
-    def test_registration_with_existing_email_shows_error(self, driver, existing_user):
+    def test_registration_with_existing_email_shows_error(self, driver):
         wait = WebDriverWait(driver, WAIT_TIMEOUT)
         wait.until(expected_conditions.element_to_be_clickable(HeaderLocators.SIGN_IN_OR_REGISTER_BUTTON)).click()
         wait.until(expected_conditions.element_to_be_clickable(AuthLocators.NO_ACCOUNT_BUTTON)).click()
-        wait.until(expected_conditions.visibility_of_element_located(RegistrationLocators.EMAIL_INPUT)).send_keys(existing_user["email"])
-        driver.find_element(*RegistrationLocators.PASSWORD_INPUT).send_keys(existing_user["password"])
-        driver.find_element(*RegistrationLocators.PASSWORD_CONFIRMATION_INPUT).send_keys(existing_user["password"])
+        wait.until(expected_conditions.visibility_of_element_located(RegistrationLocators.EMAIL_INPUT)).send_keys(TestingData.user_email)
+        driver.find_element(*RegistrationLocators.PASSWORD_INPUT).send_keys(TestingData.user_password)
+        driver.find_element(*RegistrationLocators.PASSWORD_CONFIRMATION_INPUT).send_keys(TestingData.user_password)
         driver.find_element(*RegistrationLocators.CREATE_ACCOUNT_BUTTON).click()
         email_border_color = wait.until(expected_conditions.visibility_of_element_located(RegistrationLocators.EMAIL_ERROR_CONTAINER)).value_of_css_property("border-color")
         password_border_color = wait.until(expected_conditions.visibility_of_element_located(RegistrationLocators.PASSWORD_ERROR_CONTAINER)).value_of_css_property("border-color")
